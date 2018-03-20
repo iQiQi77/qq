@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Build my first application</title>
+		 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+         <link rel="stylesheet" href="https://js.arcgis.com/3.23/esri/css/esri.css">
+         <script src="https://js.arcgis.com/3.23/"></script>
+	</head>
+    <script>
+        var map;
+        require(["esri/map",
+                 "dojo/domReady!"
+                ],
+                function(Map) 
+	                  {
+		                  map = new Map("map", 
+		                 {
+			              basemap: "topo",
+			              center: [-122.45, 37.75],
+			              zoom: 13
+		                 });
+	                 });
+        function refresh()
+		   {
+			
+		   
+			var obj = document.getElementById("selectstyle"); //定位id
+            var index = obj.selectedIndex; // 选中索引
+            var mybasemap = obj.options[index].text; // 选中文本	 
+		   
+		   
+		    var lon=document.getElementById("txtlon").value;  
+            var lat=document.getElementById("txtlat").value; 
+		    var zoo=document.getElementById("txtzoom").value; 
+			
+			
+			map.setBasemap(mybasemap);
+			map.centerAndZoom([lon,lat],zoo);
+			}
+		  
+         </script>
+		
+		<style>
+            html, body, 
+			#map {
+                      height: 100%;
+                      padding: 0;
+                      margin: 0;
+					  
+      }
+	   #optionsDiv {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      padding: 7px 0;
+      z-index: 1;
+      text-align: center;}
+</style>
+	
+	<body class="claro">
+        
+		 
+		 <div id="map">
+			 <div id="optionsDiv">
+		    经度：<input type="text" id="txtlon"/><br/> 
+		    纬度：<input type="text" id="txtlat"/><br/> 
+			
+					
+					
+			
+			
+			级别：<input type="text" id="txtzoom"/><br/>
+				
+			底图：<select id="selectstyle">
+					<option value="0">dark-gray</option>
+					<option value="1">dark-gray-vector</option>
+					<option value="2">gray</option>
+					<option value="3">gray-vector</option>
+					<option value="4">hybrid</option>
+					<option value="5">national-geographic</option>
+					<option value="6">oceans</option>
+					<option value="7">osm</option>
+					<option value="8">satellite</option>
+					<option value="9">streets</option>
+					<option value="10">streets-navigation-vector</option>
+					<option value="11">streets-night-vector</option>
+					<option value="12">streets-relief-vector</option>
+					<option value="13">streets-vector</option>
+					<option value="14">terrain</option>
+					<option value="15">topo</option>
+					<option value="16">topo-vector</option>
+					
+			</select><br/><br/>
+			
+			<input type="button" id="bnrefresh" value="刷新" onclick="refresh()"/>
+				 
+		  </div>
+		 
+		 </div>
+    </body>
+    
+</html>
